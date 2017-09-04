@@ -8,6 +8,7 @@ import android.os.Parcelable;
  */
 
 class Employees implements Parcelable {
+
     public String STFcode;
     public String STFtitle;
     public String DPcode;
@@ -23,12 +24,12 @@ class Employees implements Parcelable {
     public String STFstart;
 
     public final static String TABLE_NAME = "Employees";
-    public final static String COLUMN_STFCODE = "STFCODE";
-    public final static String COLUMN_STFFULLNAME = "STFFULLNAME";
-    public final static String COLUMN_DPCODE = "DPCODE";
-    public final static String COLUMN_BRCODE = "BRCODE";
-    public final static String COLUMN_STFSTART = "START";
-    public final static String COLUMN_STFEND = "STFEND";
+//    public final static String COLUMN_STFCODE = "STFCODE";
+//    public final static String COLUMN_STFFULLNAME = "STFFULLNAME";
+//    public final static String COLUMN_DPCODE = "DPCODE";
+//    public final static String COLUMN_BRCODE = "BRCODE";
+//    public final static String COLUMN_STFSTART = "START";
+//    public final static String COLUMN_STFEND = "STFEND";
 
     @Override
     public int describeContents() {
@@ -44,6 +45,7 @@ class Employees implements Parcelable {
         dest.writeValue(this.STFstart);
         dest.writeValue(this.PSTdes_Eng);
         dest.writeValue(this.PSTCode);
+        dest.writeValue(this.SACode);
         dest.writeValue(this.STFfname);
         dest.writeValue(this.STFlname);
         dest.writeValue(this.STFfullname);
@@ -63,6 +65,7 @@ class Employees implements Parcelable {
         this.STFstart = in.readString();
         this.PSTdes_Eng = in.readString();
         this.PSTCode = in.readString();
+        this.SACode = in.readString();
         this.STFfname = in.readString();
         this.STFlname = in.readString();
         this.STFfullname = in.readString();

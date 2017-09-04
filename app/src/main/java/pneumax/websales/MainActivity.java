@@ -6,12 +6,16 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
@@ -20,6 +24,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import pl.tajchert.nammu.Nammu;
 import pl.tajchert.nammu.PermissionCallback;
+import pneumax.websales.manager.MyConstant;
 
 //import org.apache.http.impl.client.HttpClientBuilder;
 
@@ -136,6 +141,21 @@ public class MainActivity extends AppCompatActivity {
             super.onPostExecute(s);
             try {
                 s = GlobalVar.getInstance().JsonXmlToJsonString(s);
+                String tag = "4SepV2";
+                Log.d(tag, "s GolbalVar ==> " + s);
+                String myJSON = "[" + s + "]";
+                Log.d(tag, "myJSON ==> " + myJSON);
+
+                JSONArray jsonArray = new JSONArray(myJSON);
+                JSONObject jsonObject = jsonArray.getJSONObject(0);
+                MyConstant myConstant = new MyConstant();
+                String[] columnResult = myConstant.getColumnEmployeesStrings();
+                String[] userLoginStrings = new String[columnResult.length];
+                for(int i=0; i<columnResult.length; i+=1){
+                    userLoginStrings[i] = jsonObject.getString(columnResult[i]);
+                    Log.d(tag,"userLogin[" + i +"] ==>" + userLoginStrings[i]);
+                }
+
                 Gson gson = new Gson();
                 //Employee resultEmp = gson.fromJson(s.toString(), Employee.class);
 
