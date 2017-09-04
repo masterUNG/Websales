@@ -12,8 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -140,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             try {
+                //กด Shift+CTrl+Enter ปิดตัวจบทุกอย่าง
                 s = GlobalVar.getInstance().JsonXmlToJsonString(s);
                 String tag = "4SepV2";
                 Log.d(tag, "s GolbalVar ==> " + s);
@@ -156,35 +155,46 @@ public class MainActivity extends AppCompatActivity {
                     Log.d(tag,"userLogin[" + i +"] ==>" + userLoginStrings[i]);
                 }
 
-                Gson gson = new Gson();
-                //Employee resultEmp = gson.fromJson(s.toString(), Employee.class);
-
-                Employees resultEmps = gson.fromJson(s.toString(), Employees.class);
-
-                if (resultEmps == null) {
+ //               for Not User Pacel
+                if (myJSON.equals("[]")) {
                     Toast.makeText(MainActivity.this, "Username หรือ Password ไม่ถูกต้อง !!!", Toast.LENGTH_SHORT).show();
                 } else {
-                    mEmployees = resultEmps;
-                    if (mEmployees.STFcode == null) {
-                        Toast.makeText(MainActivity.this, "Username หรือ Password ไม่ถูกต้อง !!!", Toast.LENGTH_SHORT).show();
-                    } else {
-                        //Toast.makeText(MainActivity.this, mEmployee.getSTFfullname(), Toast.LENGTH_SHORT).show();
-                        //เหมือนกับ ซองจดหมาย แล้วข้างในซองจดหมายอาจมีอะไรหลายอย่าง ใช้สำหรับสื่อสารข้าม object
-//                        Intent i = new Intent(getApplicationContext(), SuccessActivity.class);
-
-                        Intent i = new Intent(getApplicationContext(), ChooseSalesActivity.class);
-
-                        //ต้องการ Put Intent ข้อมูล ทั้ง result แต่ต้องไปทำที่หน้า UserBean ก่อน ไม่งั้น Error
-                        i.putExtra(Employees.TABLE_NAME, resultEmps);
-                        startActivity(i);
-                    }
-
-//                    //เหมือนกับ ซองจดหมาย แล้วข้างในซองจดหมายอาจมีอะไรหลายอย่าง ใช้สำหรับสื่อสารข้าม object
-//                    Intent i = new Intent(getApplicationContext(), SuccessActivity.class);
-//                    //ต้องการ Put Intent ข้อมูล ทั้ง result แต่ต้องไปทำที่หน้า UserBean ก่อน ไม่งั้น Error
-//                    i.putExtra(UserBean.TABLE_NAME, result);
-//                    startActivity(i);
+                    Intent intent = new Intent(MainActivity.this, ChooseSalesActivity.class);
+                    intent.putExtra("UserLogin", userLoginStrings);
+                    startActivity(intent);
+                    //finish(); ถ้ากด back กลับมาจะไม่เจอหน้า Login แล้ว
                 }
+
+//                s = GlobalVar.getInstance().JsonXmlToJsonString(s);
+//                Gson gson = new Gson();
+//                //Employee resultEmp = gson.fromJson(s.toString(), Employee.class);
+//
+//                Employees resultEmps = gson.fromJson(s.toString(), Employees.class);
+//
+//                if (resultEmps == null) {
+//                    Toast.makeText(MainActivity.this, "Username หรือ Password ไม่ถูกต้อง !!!", Toast.LENGTH_SHORT).show();
+//                } else {
+//                    mEmployees = resultEmps;
+//                    if (mEmployees.STFcode == null) {
+//                        Toast.makeText(MainActivity.this, "Username หรือ Password ไม่ถูกต้อง !!!", Toast.LENGTH_SHORT).show();
+//                    } else {
+//                        //Toast.makeText(MainActivity.this, mEmployee.getSTFfullname(), Toast.LENGTH_SHORT).show();
+//                        //เหมือนกับ ซองจดหมาย แล้วข้างในซองจดหมายอาจมีอะไรหลายอย่าง ใช้สำหรับสื่อสารข้าม object
+////                        Intent i = new Intent(getApplicationContext(), SuccessActivity.class);
+//
+//                        Intent i = new Intent(getApplicationContext(), ChooseSalesActivity.class);
+//
+//                        //ต้องการ Put Intent ข้อมูล ทั้ง result แต่ต้องไปทำที่หน้า UserBean ก่อน ไม่งั้น Error
+//                        i.putExtra(Employees.TABLE_NAME, resultEmps);
+//                        startActivity(i);
+//                    }
+//
+////                    //เหมือนกับ ซองจดหมาย แล้วข้างในซองจดหมายอาจมีอะไรหลายอย่าง ใช้สำหรับสื่อสารข้าม object
+////                    Intent i = new Intent(getApplicationContext(), SuccessActivity.class);
+////                    //ต้องการ Put Intent ข้อมูล ทั้ง result แต่ต้องไปทำที่หน้า UserBean ก่อน ไม่งั้น Error
+////                    i.putExtra(UserBean.TABLE_NAME, result);
+////                    startActivity(i);
+//                } // if
             } catch (Exception e) {
                 //e.printStackTrace();
                 Toast.makeText(MainActivity.this, "e:" + e, Toast.LENGTH_SHORT).show();

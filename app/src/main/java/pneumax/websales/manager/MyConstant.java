@@ -6,6 +6,14 @@ package pneumax.websales.manager;
 
 public class MyConstant {
 
+
+    //About URL
+    private String urlGetSalesNameWhere = "http://58.181.171.23/webservice/Service.asmx/getEmployeeName";
+    //กด Alt+Ins เลือก GETTER มันจะสร้างให้อัตโนมัติ
+    public String getUrlGetSalesNameWhere() {
+        return urlGetSalesNameWhere;
+    }
+
     private String[] columnEmployeesStrings = new String[]{
             "STFcode",
             "STFtitle",
