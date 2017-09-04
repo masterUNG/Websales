@@ -42,7 +42,6 @@ class Employees implements Parcelable {
         dest.writeString(this.STFtitle);
         dest.writeValue(this.DPcode);
         dest.writeValue(this.DPname);
-        dest.writeValue(this.STFstart);
         dest.writeValue(this.PSTdes_Eng);
         dest.writeValue(this.PSTCode);
         dest.writeValue(this.SACode);
@@ -62,7 +61,6 @@ class Employees implements Parcelable {
         this.STFtitle = in.readString();
         this.DPcode = in.readString();
         this.DPname = in.readString();
-        this.STFstart = in.readString();
         this.PSTdes_Eng = in.readString();
         this.PSTCode = in.readString();
         this.SACode = in.readString();
