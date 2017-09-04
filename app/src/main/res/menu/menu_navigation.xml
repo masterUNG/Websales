@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/Appointment"
+            android:title="Appointment"
+            android:icon="@drawable/ic_home"/>
+        <item
+            android:id="@+id/AppointmentResult"
+            android:title="Appointment Result"
+            android:icon="@drawable/ic_setting"/>
+        <item
+            android:id="@+id/CustInfoByPhone"
+            android:title="Cust. Info by phone"
+            android:icon="@drawable/ic_trash"/>
+        <item
+            android:id="@+id/logout"
+            android:title="Logout"
+            android:icon="@drawable/ic_exit"/>
+    </group>
+</menu>

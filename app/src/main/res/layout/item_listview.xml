@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="1dp"
+    android:paddingRight="1dp"
+    android:paddingTop="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="23dp"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="No"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="1dp"
+            android:gravity="center_vertical"
+            android:layout_below="@+id/item_listview_title"
+            android:text="วันที่นัด"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="1dp"
+            android:gravity="center_vertical"
+            android:layout_below="@+id/item_listview_title"
+            android:text="เวลา"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="180dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="1dp"
+            android:gravity="center_vertical"
+            android:layout_below="@+id/item_listview_title"
+            android:text="ชื่อลูกค้า"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="1dp"
+            android:gravity="center_vertical"
+            android:layout_below="@+id/item_listview_title"
+            android:text="รหัสลูกค้า"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="1dp"
+            android:gravity="center_vertical"
+            android:layout_below="@+id/item_listview_title"
+            android:text="DPcode"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="1dp"
+            android:gravity="center_vertical"
+            android:layout_below="@+id/item_listview_title"
+            android:text="SAcode"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+
+    <!-- A CardView that contains a TextView -->
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        card_view:cardBackgroundColor="#99FFFFFF"
+        card_view:cardCornerRadius="4dp"
+        card_view:cardElevation="2sp"
+        card_view:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#77FFFFFF"
+                android:paddingRight="24dp">
+
+                <ImageView
+                    android:id="@+id/item_listview_avatarIcon"
+                    android:layout_width="50dip"
+                    android:layout_height="50dip"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="16dp"
+                    android:padding="3dp"
+                    android:scaleType="fitStart"/>
+
+
+                <TextView
+                    android:id="@+id/item_listview_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_toRightOf="@+id/item_listview_avatarIcon"
+                    android:gravity="center_vertical"
+                    android:text="Loading.."
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/item_listview_subtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/item_listview_title"
+                    android:layout_marginBottom="8dp"
+                    android:layout_toRightOf="@+id/item_listview_avatarIcon"
+                    android:gravity="center_vertical"
+                    android:text="Description" />
+
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/item_listview_youtube_image"
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:scaleType="centerCrop"/>
+
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+</LinearLayout>
