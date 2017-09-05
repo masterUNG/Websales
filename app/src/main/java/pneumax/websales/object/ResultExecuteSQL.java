@@ -1,11 +1,10 @@
-package pneumax.websales;
+package pneumax.websales.object;
 
 /**
- * Created by sitrach on 21/08/2017.
+ * Created by sitrach on 05/09/2017.
  */
 
-public class ResultSQL {
-
+public class ResultExecuteSQL {
     /**
      * ResultID : Function_InsertAppointment
      * ResultMessage : Conversion from string "" to type 'Date' is not valid.

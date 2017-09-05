@@ -1,4 +1,4 @@
-package pneumax.websales;
+package pneumax.websales.object;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -7,7 +7,7 @@ import android.os.Parcelable;
  * Created by sitrach on 02/09/2017.
  */
 
-class Employees implements Parcelable {
+public class Employees implements Parcelable {
 
     public String STFcode;
     public String STFtitle;

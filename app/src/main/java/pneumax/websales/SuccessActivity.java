@@ -13,27 +13,47 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import pneumax.websales.object.Employees;
+import pneumax.websales.object.ObjectSale;
+
+
 public class SuccessActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
     private AlertDialog.Builder builder;
-    private Employees mEmployees;
+    private Employees employeesLogin;
+    private ObjectSale objectSaleLogin;
+    private TextView viewById;
+    //private TextView mtxtHeaderSAcode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_success);
 
-        // get inbound intent
-        Intent inboundIntent = getIntent();
-        mEmployees = (Employees) inboundIntent.getParcelableExtra(Employees.TABLE_NAME);
+        //getValueFromIntent
+        getValueFromIntent();
+        //bindWidgets
+        bindWidgets();
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         initNavigationDrawer();
         //Default fragment Appointment
         //Call fragment Appointment
         CallfragmentAppointment();
+
+    }
+
+    private void getValueFromIntent() {
+        Intent inboundIntent = getIntent();
+        employeesLogin = (Employees) inboundIntent.getParcelableExtra(Employees.TABLE_NAME);
+        objectSaleLogin = (ObjectSale) inboundIntent.getParcelableExtra(ObjectSale.TABLE_NAME);
+    }//getValueFromIntent
+
+    private void bindWidgets() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+
     }
 
     public void initNavigationDrawer() {
@@ -79,10 +99,11 @@ public class SuccessActivity extends AppCompatActivity {
             }
         });
         View header = navigationView.getHeaderView(0);
-        TextView txtviewSAcode = (TextView)header.findViewById(R.id.SAcode);
-        txtviewSAcode.setText("Sale Code : 2035-0" + System.getProperty("line.separator")+"Name : สิทธิ์ราช เรืองสมานไมตรี");
-        drawerLayout = (DrawerLayout)findViewById(R.id.drawer);
 
+        TextView _txtHeaderSAcode = (TextView)header.findViewById(R.id.txtViewHeaderSAcode);
+        _txtHeaderSAcode.setText("Sale Code : " + objectSaleLogin.SACode + System.getProperty("line.separator") + "Name : " + objectSaleLogin.STFfullname);
+
+        drawerLayout = (DrawerLayout)findViewById(R.id.drawer);
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.drawer_open,R.string.drawer_close){
 
             @Override
@@ -98,38 +119,38 @@ public class SuccessActivity extends AppCompatActivity {
 
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
-    }
+    }//initNavigationDrawer
 
     //Set Title Toolbar Name
     private void setTitleToolbar(String s){
         this.setTitle(s);
     }
 
-    //Call fragment Appointment
+
     private void CallfragmentAppointment(){
         setTitleToolbar("Appointment");
         //Toast.makeText(getApplicationContext(),"Appointment",Toast.LENGTH_SHORT).show();
-    }
+    }//Call fragment Appointment
 
-    //Call fragment Appointment Result
+
     private void CallfragmentAppointmentResult(){
         setTitleToolbar("Appointment Result");
         //Toast.makeText(getApplicationContext(),"Appointment Result",Toast.LENGTH_SHORT).show();
-    }
+    }//Call fragment Appointment Result
 
-    //Call fragment CustInfoByphone
+
     private void CallfragmentCustInfoByphone(){
         setTitleToolbar("Cust.Info by phone");
         //Toast.makeText(getApplicationContext(),"Cust.Info by phone",Toast.LENGTH_SHORT).show();
-    }
+    }//Call fragment CustInfoByphone
 
-    //Logout Program
+
     private void Logout(){
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("finish", true);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // To clean up all activities
         startActivity(intent);
         finish();
-    }
+    }//Logout Program
 
 }

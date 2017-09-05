@@ -1,4 +1,4 @@
-package pneumax.websales;
+package pneumax.websales.connected;
 
 import java.io.IOException;
 

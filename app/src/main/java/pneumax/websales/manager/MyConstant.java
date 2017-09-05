@@ -31,6 +31,25 @@ public class MyConstant {
         return urlGetSalesCodeWhere;
     }
 
+    //About URL getAppointmentGrid
+    private String urlGetAppointmentGrid = "http://58.181.171.23/webservice/Service.asmx/getAppointmentGrid";
+    public String getUrlGetAppointmentGrid() {
+        return urlGetAppointmentGrid;
+    }
+
+    //About URL getAppointment
+    private String urlGetAppointment = "http://58.181.171.23/webservice/Service.asmx/getAppointment";
+    public String getUrlGetAppointment() {
+        return urlGetAppointment;
+    }
+
+    //About URL getCustomerGrid
+    private String urlGetCustomerGrid = "http://58.181.171.23/webservice/Service.asmx/getCustomerGrid";
+    public String getUrlGetCustomerGrid() {
+        return urlGetCustomerGrid;
+    }
+
+
     private String[] columnEmployeesStrings = new String[]{
             "STFcode",
             "STFtitle",

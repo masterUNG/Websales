@@ -24,7 +24,10 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import pl.tajchert.nammu.Nammu;
 import pl.tajchert.nammu.PermissionCallback;
+import pneumax.websales.connected.BasicAuthInterceptor;
+import pneumax.websales.manager.GlobalVar;
 import pneumax.websales.manager.MyConstant;
+import pneumax.websales.object.Employees;
 
 //import org.apache.http.impl.client.HttpClientBuilder;
 //import org.apache.http.client.HttpClient;
@@ -146,20 +149,20 @@ public class MainActivity extends AppCompatActivity {
                 String tag = "4SepV2";
                 Log.d(tag, "myJSON ==> " + myJSON);
 
-                JSONArray jsonArray = new JSONArray(myJSON);
-                JSONObject jsonObject = jsonArray.getJSONObject(0);
-                MyConstant myConstant = new MyConstant();
-                String[] columnResult = myConstant.getColumnEmployeesStrings();
-                String[] userLoginStrings = new String[columnResult.length];
-                for(int i=0; i<columnResult.length; i+=1){
-                    userLoginStrings[i] = jsonObject.getString(columnResult[i]);
-                    Log.d(tag,"userLogin[" + i +"] ==>" + userLoginStrings[i]);
-                }
-
- //               for Not User Pacel
-                if (s.equals("[]")) {
+                //               for Not User Pacel
+                if (myJSON.equals("[]")) {
                     Toast.makeText(MainActivity.this, "Username หรือ Password ไม่ถูกต้อง !!!", Toast.LENGTH_SHORT).show();
                 } else {
+                    JSONArray jsonArray = new JSONArray(myJSON);
+                    JSONObject jsonObject = jsonArray.getJSONObject(0);
+                    MyConstant myConstant = new MyConstant();
+                    String[] columnResult = myConstant.getColumnEmployeesStrings();
+                    String[] userLoginStrings = new String[columnResult.length];
+                    for(int i=0; i<columnResult.length; i+=1){
+                        userLoginStrings[i] = jsonObject.getString(columnResult[i]);
+                        Log.d(tag,"userLogin[" + i +"] ==>" + userLoginStrings[i]);
+                    }
+
                     s = GlobalVar.getInstance().JsonXmlToJsonStringNotSquareBracket(s);
                     Gson gson = new Gson();
                     Employees rusultEmployeesLogin = gson.fromJson(s.toString(), Employees.class);
@@ -167,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainActivity.this, ChooseSalesActivity.class);
                     intent.putExtra(Employees.TABLE_NAME, rusultEmployeesLogin);
                     startActivity(intent);
-                    //finish(); ถ้ากด back กลับมาจะไม่เจอหน้า Login แล้ว
+                    //finish(); //ถ้ากด back กลับมาจะไม่เจอหน้า Login แล้ว
                 }
 
 

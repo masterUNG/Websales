@@ -1,4 +1,4 @@
-package pneumax.websales;
+package pneumax.websales.manager;
 
 import android.widget.EditText;
 
@@ -37,9 +37,9 @@ public class GlobalVar {
 
     public int someValueIWantToKeep;
 
-    protected GlobalVar(){}
+//    protected GlobalVar(){}
 
-    public static synchronized GlobalVar getInstance(){
+    public static synchronized pneumax.websales.manager.GlobalVar getInstance(){
         if(null == mInstance){
             mInstance = new GlobalVar();
         }

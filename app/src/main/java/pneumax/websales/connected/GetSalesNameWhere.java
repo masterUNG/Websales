@@ -5,7 +5,6 @@ import android.os.AsyncTask;
 
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
-import pneumax.websales.BasicAuthInterceptor;
 
 /**
  * Created by Sitrach on 04/09/2017.
