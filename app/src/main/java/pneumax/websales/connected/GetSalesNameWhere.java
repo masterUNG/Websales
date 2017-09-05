@@ -11,7 +11,7 @@ import pneumax.websales.BasicAuthInterceptor;
  * Created by Sitrach on 04/09/2017.
  */
 
-public class GetSalesNameWhere extends AsyncTask<String, Void,String>{
+public class GetSalesNameWhere extends AsyncTask<String, Void, String>{
 
     private Context context;
 
@@ -21,7 +21,6 @@ public class GetSalesNameWhere extends AsyncTask<String, Void,String>{
 
     @Override
     protected String doInBackground(String... params) {
-
         try {
             okhttp3.RequestBody data = new FormBody.Builder()
                     .add("STFcode", params[0])

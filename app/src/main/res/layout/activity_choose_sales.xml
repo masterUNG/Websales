@@ -6,11 +6,62 @@
     android:layout_height="match_parent"
     tools:context="pneumax.websales.ChooseSalesActivity">
 
-    <!--Name-->
-    <Spinner
-        android:id="@+id/spnName"
-        android:layout_margin="20dp"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:orientation="vertical">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:text="Sale Name :"
+            android:textColor="@color/colorPrimaryDark" />
+        <!--Spinner Sales Name-->
+        <Spinner
+            android:id="@+id/spnSalesName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:text="Department :"
+            android:textColor="@color/colorPrimaryDark" />
+        <!--Spinner Sales Name-->
+        <Spinner
+            android:id="@+id/spnDepartment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="Sale Code :"
+                android:textColor="@color/colorPrimaryDark" />
+
+            <TextView
+                android:id="@+id/txtViewSAcode"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:text="2035-0"
+                android:textColor="@color/colorPrimaryDark" />
+
+            <TextView
+                android:id="@+id/txtViewSAJobDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ออกตลาดเริ่ม01/08/2017"
+                android:textColor="@color/colorPrimaryDark" />
+        </LinearLayout>
+
+    </LinearLayout>
 </RelativeLayout>

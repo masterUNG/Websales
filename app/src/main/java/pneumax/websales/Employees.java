@@ -13,23 +13,17 @@ class Employees implements Parcelable {
     public String STFtitle;
     public String DPcode;
     public String DPname;
-    public String PSTdes_Eng;
+    public String PSTdesEng;
     public String PSTCode;
     public String SACode;
     public String STFfname;
     public String STFlname;
     public String STFfullname;
-    public String BRcode1;
-    public String BRdesc_T;
+    public String BRcode;
+    public String BRdescThai;
     public String STFstart;
 
     public final static String TABLE_NAME = "Employees";
-//    public final static String COLUMN_STFCODE = "STFCODE";
-//    public final static String COLUMN_STFFULLNAME = "STFFULLNAME";
-//    public final static String COLUMN_DPCODE = "DPCODE";
-//    public final static String COLUMN_BRCODE = "BRCODE";
-//    public final static String COLUMN_STFSTART = "START";
-//    public final static String COLUMN_STFEND = "STFEND";
 
     @Override
     public int describeContents() {
@@ -40,17 +34,17 @@ class Employees implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.STFcode);
         dest.writeString(this.STFtitle);
-        dest.writeValue(this.DPcode);
-        dest.writeValue(this.DPname);
-        dest.writeValue(this.PSTdes_Eng);
-        dest.writeValue(this.PSTCode);
-        dest.writeValue(this.SACode);
-        dest.writeValue(this.STFfname);
-        dest.writeValue(this.STFlname);
-        dest.writeValue(this.STFfullname);
-        dest.writeValue(this.BRcode1);
-        dest.writeValue(this.BRdesc_T);
-        dest.writeValue(this.STFstart);
+        dest.writeString(this.DPcode);
+        dest.writeString(this.DPname);
+        dest.writeString(this.PSTdesEng);
+        dest.writeString(this.PSTCode);
+        dest.writeString(this.SACode);
+        dest.writeString(this.STFfname);
+        dest.writeString(this.STFlname);
+        dest.writeString(this.STFfullname);
+        dest.writeString(this.BRcode);
+        dest.writeString(this.BRdescThai);
+        dest.writeString(this.STFstart);
     }
 
     public Employees() {
@@ -61,14 +55,14 @@ class Employees implements Parcelable {
         this.STFtitle = in.readString();
         this.DPcode = in.readString();
         this.DPname = in.readString();
-        this.PSTdes_Eng = in.readString();
+        this.PSTdesEng = in.readString();
         this.PSTCode = in.readString();
         this.SACode = in.readString();
         this.STFfname = in.readString();
         this.STFlname = in.readString();
         this.STFfullname = in.readString();
-        this.BRcode1 = in.readString();
-        this.BRdesc_T = in.readString();
+        this.BRcode = in.readString();
+        this.BRdescThai = in.readString();
         this.STFstart = in.readString();
     }
 

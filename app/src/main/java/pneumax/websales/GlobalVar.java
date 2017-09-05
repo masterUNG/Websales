@@ -8,12 +8,20 @@ import android.widget.EditText;
 
 public class GlobalVar {
 
-    //สำหรับแปลงไฟล์จากหน้า Webservice แบบไม่ใช่ Array
-    public String JsonXmlToJsonString(String string){
+    //Convert Data Webservice To JSONArray Not [ ]
+    public String JsonXmlToJsonStringNotSquareBracket(String string){
         string = string.substring(40, string.length());
         string = string.replace("<string xmlns=\"http://58.181.171.23/Webservice/\">", "");
         string = string.replace("</string>", "");
         string = string.replace("[", "").replace("]","");
+        return string;
+    }
+
+    //Convert Data Webservice To JSONArray
+    public String JsonXmlToJsonString(String string){
+        string = string.substring(40, string.length());
+        string = string.replace("<string xmlns=\"http://58.181.171.23/Webservice/\">", "");
+        string = string.replace("</string>", "");
         return string;
     }
 

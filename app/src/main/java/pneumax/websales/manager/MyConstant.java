@@ -6,12 +6,29 @@ package pneumax.websales.manager;
 
 public class MyConstant {
 
-
-    //About URL
-    private String urlGetSalesNameWhere = "http://58.181.171.23/webservice/Service.asmx/getEmployeeName";
+    //About URL getLogin
+    private String urlGetLoginWhere = "http://58.181.171.23/webservice/Service.asmx/getLogin";
     //กด Alt+Ins เลือก GETTER มันจะสร้างให้อัตโนมัติ
+    public String geturlGetLoginWhere() {
+        return urlGetLoginWhere;
+    }
+
+    //About URL getEmployeeName
+    private String urlGetSalesNameWhere = "http://58.181.171.23/webservice/Service.asmx/getEmployeeName";
     public String getUrlGetSalesNameWhere() {
         return urlGetSalesNameWhere;
+    }
+
+    //About URL getDepartment
+    private String urlGetDepartmentWhere = "http://58.181.171.23/webservice/Service.asmx/getDepartment";
+    public String getUrlGetDepartmentWhere() {
+        return urlGetDepartmentWhere;
+    }
+
+    //About URL getSalesCode
+    private String urlGetSalesCodeWhere = "http://58.181.171.23/webservice/Service.asmx/getSalesCode";
+    public String getUrlGetSalesCodeWhere() {
+        return urlGetSalesCodeWhere;
     }
 
     private String[] columnEmployeesStrings = new String[]{
@@ -19,17 +36,18 @@ public class MyConstant {
             "STFtitle",
             "DPcode",
             "DPname",
-            "PSTdes_Eng",
+            "PSTdesEng",
             "PSTCode",
             "SACode",
             "STFfname",
             "STFlname",
             "STFfullname",
-            "BRcode1",
-            "BRdesc_T",
+            "BRcode",
+            "BRdescThai",
             "STFstart"};
 
     public String[] getColumnEmployeesStrings() {
         return columnEmployeesStrings;
     }
+
 }// Main Class
