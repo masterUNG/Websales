@@ -10,8 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import pneumax.websales.R;
 import pneumax.websales.connected.GetAppointmentGridWhere;
+import pneumax.websales.manager.GlobalVar;
 import pneumax.websales.manager.MyConstant;
 import pneumax.websales.object.Employees;
 import pneumax.websales.object.ObjectSale;
@@ -20,7 +24,7 @@ import pneumax.websales.object.ObjectSale;
  * Created by Sitrach on 06/09/2017.
  */
 
-public class AppointmentFragment extends Fragment{
+public class AppointmentFragment extends Fragment {
 
     private Employees employeesLogin;
     private ObjectSale objectSaleLogin;
@@ -78,7 +82,23 @@ public class AppointmentFragment extends Fragment{
                     myConstant.getUrlGetAppointmentGrid());
 
             String resultJSON = getAppointmentGridWhere.get();
+
+            GlobalVar globalVar = new GlobalVar();
+            resultJSON = globalVar.JsonXmlToJsonString(resultJSON);
             Log.d(tag, "JSON ==> " + resultJSON);
+
+            JSONArray jsonArray = new JSONArray(resultJSON);
+            String[] AppdateStrings = new String[jsonArray.length()];
+            String[] AppStartTimeStrings = new String[jsonArray.length()];
+            String[] CSnameStrings = new String[jsonArray.length()];
+            for (int i = 0; i < jsonArray.length(); i += 1) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                AppdateStrings[i] = jsonObject.getString("AppDate");
+                AppStartTimeStrings[i] = jsonObject.getString("AppStartTime");
+                CSnameStrings[i] = jsonObject.getString("CSthiname");
+
+                Log.d(tag, "Name [" + i + "] ==> " + CSnameStrings[i]);
+            }//for
 
         } catch (Exception e) {
             Log.d(tag, "e Create ListView ==> " + e.toString());
