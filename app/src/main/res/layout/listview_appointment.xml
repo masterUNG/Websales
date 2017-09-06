@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+
+    <TextView
+        android:id="@+id/txtColAppdate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/dateAppoint"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/h2" />
+
+    <TextView
+        android:id="@+id/txtColApptime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/timeAppoint"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/h2" />
+
+    <TextView
+        android:id="@+id/txtColCsname"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:text="@string/customerAppoint"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/h2" />
+
+</LinearLayout>
