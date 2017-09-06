@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import pneumax.websales.fragment.AppointmentFragment;
 import pneumax.websales.object.Employees;
 import pneumax.websales.object.ObjectSale;
 
@@ -42,7 +43,14 @@ public class SuccessActivity extends AppCompatActivity {
         //Call fragment Appointment
         CallfragmentAppointment();
 
-    }
+        //Add Fragment to Activity
+        if (savedInstanceState == null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.serviceContentFragment, new AppointmentFragment())
+                    .commit();
+        }
+    }//onCreate
 
     private void getValueFromIntent() {
         Intent inboundIntent = getIntent();
