@@ -8,4 +8,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
+    <string name="dateAppoint">วันที่นัด</string>
+    <string name="timeAppoint">เวลา</string>
+    <string name="customerAppoint">ชื่อลูกค้า</string>
 </resources>
