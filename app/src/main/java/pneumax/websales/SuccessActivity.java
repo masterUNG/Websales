@@ -13,7 +13,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import pneumax.websales.fragment.AppointResultFragment;
 import pneumax.websales.fragment.AppointmentFragment;
+import pneumax.websales.fragment.CustInfoByPhoneFragment;
 import pneumax.websales.object.Employees;
 import pneumax.websales.object.ObjectSale;
 
@@ -38,17 +40,15 @@ public class SuccessActivity extends AppCompatActivity {
         bindWidgets();
 
         setSupportActionBar(toolbar);
+
         initNavigationDrawer();
-        //Default fragment Appointment
-        //Call fragment Appointment
-        CallfragmentAppointment();
 
         //Add Fragment to Activity
+        //savedInstanceState เหมือนเก็บหน้าเดิมไว้ แต่ปิดโรปแกรมไปแล้ว จะเป็น null
         if (savedInstanceState == null) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .add(R.id.serviceContentFragment, new AppointmentFragment())
-                    .commit();
+            //Default fragment Appointment
+            //Call fragment Appointment
+            CallfragmentAppointment();
         }
     }//onCreate
 
@@ -66,13 +66,13 @@ public class SuccessActivity extends AppCompatActivity {
 
     public void initNavigationDrawer() {
         builder = new AlertDialog.Builder(this);
-        NavigationView navigationView = (NavigationView)findViewById(R.id.navigation_view);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 int id = menuItem.getItemId();
 
-                switch (id){
+                switch (id) {
                     case R.id.Appointment:
                         //Call fragment Appointment
                         CallfragmentAppointment();
@@ -94,8 +94,7 @@ public class SuccessActivity extends AppCompatActivity {
                                 .setIcon(android.R.drawable.ic_dialog_alert)
                                 .setTitle("Log Out")
                                 .setMessage("Are you sure you want to log out?")
-                                .setPositiveButton("Log Out", new DialogInterface.OnClickListener()
-                                {
+                                .setPositiveButton("Log Out", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         Logout();
@@ -109,14 +108,14 @@ public class SuccessActivity extends AppCompatActivity {
         });
         View header = navigationView.getHeaderView(0);
 
-        TextView _txtHeaderSAcode = (TextView)header.findViewById(R.id.txtViewHeaderSAcode);
+        TextView _txtHeaderSAcode = (TextView) header.findViewById(R.id.txtViewHeaderSAcode);
         _txtHeaderSAcode.setText("Sale Code : " + objectSaleLogin.SACode + System.getProperty("line.separator") + "Name : " + objectSaleLogin.STFfullname);
 
-        drawerLayout = (DrawerLayout)findViewById(R.id.drawer);
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.drawer_open,R.string.drawer_close){
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close) {
 
             @Override
-            public void onDrawerClosed(View v){
+            public void onDrawerClosed(View v) {
                 super.onDrawerClosed(v);
             }
 
@@ -131,30 +130,44 @@ public class SuccessActivity extends AppCompatActivity {
     }//initNavigationDrawer
 
     //Set Title Toolbar Name
-    private void setTitleToolbar(String s){
+    private void setTitleToolbar(String s) {
         this.setTitle(s);
     }
 
 
-    private void CallfragmentAppointment(){
+    private void CallfragmentAppointment() {
         setTitleToolbar("Appointment");
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.serviceContentFragment, new AppointmentFragment())
+                .commit();
         //Toast.makeText(getApplicationContext(),"Appointment",Toast.LENGTH_SHORT).show();
     }//Call fragment Appointment
 
 
-    private void CallfragmentAppointmentResult(){
+    private void CallfragmentAppointmentResult() {
         setTitleToolbar("Appointment Result");
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.serviceContentFragment, new AppointResultFragment())
+                .commit();
         //Toast.makeText(getApplicationContext(),"Appointment Result",Toast.LENGTH_SHORT).show();
     }//Call fragment Appointment Result
 
 
-    private void CallfragmentCustInfoByphone(){
+    private void CallfragmentCustInfoByphone() {
         setTitleToolbar("Cust.Info by phone");
-        //Toast.makeText(getApplicationContext(),"Cust.Info by phone",Toast.LENGTH_SHORT).show();
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.serviceContentFragment, new CustInfoByPhoneFragment())
+                .commit();
     }//Call fragment CustInfoByphone
 
 
-    private void Logout(){
+    private void Logout() {
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("finish", true);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // To clean up all activities
