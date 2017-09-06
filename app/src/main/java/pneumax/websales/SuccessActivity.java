@@ -75,6 +75,7 @@ public class SuccessActivity extends AppCompatActivity {
                         CallfragmentAppointmentResult();
                         drawerLayout.closeDrawers();
                         break;
+
                     case R.id.CustInfoByPhone:
                         //Call fragment CustInfoByphone
                         CallfragmentCustInfoByphone();
