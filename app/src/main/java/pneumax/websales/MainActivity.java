@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "กรุณาป้อน Password ด้วย !!!", Toast.LENGTH_SHORT).show();
                 } else {
                     MyConstant myConstant = new MyConstant();
-                    String url = myConstant.geturlGetLoginWhere();
+                    String url = myConstant.getUrlGetLoginWhere();
                     OkHttpHandler okHttpHandler = new OkHttpHandler();
                     okHttpHandler.execute(url);
                 }

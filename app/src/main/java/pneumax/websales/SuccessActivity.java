@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -27,7 +28,9 @@ public class SuccessActivity extends AppCompatActivity {
     private Employees employeesLogin;
     private ObjectSale objectSaleLogin;
     private TextView viewById;
-    //private TextView mtxtHeaderSAcode;
+
+    private String DPcodeString, SAcodeString;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,14 +46,24 @@ public class SuccessActivity extends AppCompatActivity {
 
         initNavigationDrawer();
 
+
         //Add Fragment to Activity
+        addfragmentFirst(savedInstanceState);
+    }//onCreate
+
+    private void addfragmentFirst(Bundle savedInstanceState) {
+        SAcodeString = objectSaleLogin.SACode;
+        DPcodeString = objectSaleLogin.DPcode;
+        Log.d("6SepV1", "SAcodeString ==> " + SAcodeString);
+        Log.d("6SepV1", "DPcodeString ==> " + DPcodeString);
+
         //savedInstanceState เหมือนเก็บหน้าเดิมไว้ แต่ปิดโรปแกรมไปแล้ว จะเป็น null
         if (savedInstanceState == null) {
             //Default fragment Appointment
             //Call fragment Appointment
             CallfragmentAppointment();
         }
-    }//onCreate
+    }//addfragmentFirst
 
     private void getValueFromIntent() {
         Intent inboundIntent = getIntent();
@@ -140,7 +153,8 @@ public class SuccessActivity extends AppCompatActivity {
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.serviceContentFragment, new AppointmentFragment())
+                .replace(R.id.serviceContentFragment,
+                        AppointmentFragment.appointmentInsatance(DPcodeString, SAcodeString))
                 .commit();
         //Toast.makeText(getApplicationContext(),"Appointment",Toast.LENGTH_SHORT).show();
     }//Call fragment Appointment
