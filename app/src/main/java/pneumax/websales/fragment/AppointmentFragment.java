@@ -1,6 +1,7 @@
 package pneumax.websales.fragment;
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -9,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import pneumax.websales.R;
+import pneumax.websales.object.Employees;
+import pneumax.websales.object.ObjectSale;
 
 /**
  * Created by Sitrach on 06/09/2017.
@@ -16,17 +19,19 @@ import pneumax.websales.R;
 
 public class AppointmentFragment extends Fragment{
 
+    private Employees employeesLogin;
+    private ObjectSale objectSaleLogin;
     //Explicit
     private String DPcodeString, SAcodeString;
 
 
-    public static AppointmentFragment appointmentInsatance(String strDPcode,
-                                                           String strSAcode) {
+    public static AppointmentFragment appointmentInsatance(Parcelable parcelEmplyeesLogin,
+                                                           Parcelable parcelObjectSaleLogin) {
 
         AppointmentFragment appointmentFragment = new AppointmentFragment();
         Bundle bundle = new Bundle();
-        bundle.putString("DPcode", strDPcode);
-        bundle.putString("SAcode", strSAcode);
+        bundle.putParcelable(Employees.TABLE_NAME, parcelEmplyeesLogin);
+        bundle.putParcelable(ObjectSale.TABLE_NAME, parcelObjectSaleLogin);
         appointmentFragment.setArguments(bundle);
         return appointmentFragment;
     }
@@ -42,11 +47,11 @@ public class AppointmentFragment extends Fragment{
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        DPcodeString = getArguments().getString("DPcode");
-        SAcodeString = getArguments().getString("SAcode");
+        employeesLogin = (Employees) getArguments().getParcelable(Employees.TABLE_NAME);
+        objectSaleLogin = (ObjectSale) getArguments().getParcelable(ObjectSale.TABLE_NAME);
 
-        Log.d("6SepV1", "DPcode on Fragment ==> " + DPcodeString);
-        Log.d("6SepV1", "SAcode on Fragment ==> " + SAcodeString);
+        Log.d("6SepV1", "DPcode on Fragment ==> " + objectSaleLogin.DPcode);
+        Log.d("6SepV1", "SAcode on Fragment ==> " + objectSaleLogin.SACode);
     }//onCreate
 
 }//Main Class

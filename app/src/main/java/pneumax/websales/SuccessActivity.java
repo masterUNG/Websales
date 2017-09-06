@@ -46,7 +46,6 @@ public class SuccessActivity extends AppCompatActivity {
 
         initNavigationDrawer();
 
-
         //Add Fragment to Activity
         addfragmentFirst(savedInstanceState);
     }//onCreate
@@ -151,12 +150,25 @@ public class SuccessActivity extends AppCompatActivity {
     private void CallfragmentAppointment() {
         setTitleToolbar("Appointment");
 
+        //ใส่ค่า mRecycleViewFragment.setArguments(UserBean) ตรงๆไม่ได้ ต้องแปลงก่อนส่ง
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(Employees.TABLE_NAME, employeesLogin);
+        bundle.putParcelable(ObjectSale.TABLE_NAME, objectSaleLogin);
+
+//        AppointmentFragment appointmentFragment = new AppointmentFragment();
+//        appointmentFragment.setArguments(bundle);
+//
+//        getSupportFragmentManager()
+//                .beginTransaction()
+//                .replace(R.id.serviceContentFragment, appointmentFragment)
+//                .commit();
+
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.serviceContentFragment,
-                        AppointmentFragment.appointmentInsatance(DPcodeString, SAcodeString))
+                        AppointmentFragment.appointmentInsatance(employeesLogin, objectSaleLogin))
                 .commit();
-        //Toast.makeText(getApplicationContext(),"Appointment",Toast.LENGTH_SHORT).show();
+
     }//Call fragment Appointment
 
 
@@ -167,7 +179,6 @@ public class SuccessActivity extends AppCompatActivity {
                 .beginTransaction()
                 .replace(R.id.serviceContentFragment, new AppointResultFragment())
                 .commit();
-        //Toast.makeText(getApplicationContext(),"Appointment Result",Toast.LENGTH_SHORT).show();
     }//Call fragment Appointment Result
 
 

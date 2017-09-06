@@ -82,7 +82,7 @@ public class ChooseSalesActivity extends AppCompatActivity {
                     intent.putExtra(Employees.TABLE_NAME, employeesLogin);
                     intent.putExtra(ObjectSale.TABLE_NAME, objectSaleLogin);
                     startActivity(intent);
-                    finish();
+//                    finish();
                 }
             }
         });//BtnOK
