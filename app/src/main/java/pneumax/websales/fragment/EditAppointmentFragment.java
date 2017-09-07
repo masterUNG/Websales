@@ -9,8 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.gson.Gson;
+
 import pneumax.websales.R;
+import pneumax.websales.connected.PostFourString;
 import pneumax.websales.manager.GlobalVar;
+import pneumax.websales.manager.MyConstant;
+import pneumax.websales.object.Appointment;
 import pneumax.websales.object.Employees;
 import pneumax.websales.object.ObjectSale;
 
@@ -42,13 +47,14 @@ public class EditAppointmentFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         String tag = "7SepV3";
+        globalVar = new GlobalVar();
         employeesLogin = (Employees) getArguments().getParcelable(Employees.TABLE_NAME);
         objectSaleLogin = (ObjectSale) getArguments().getParcelable(ObjectSale.TABLE_NAME);
-        appDateString = getArguments().getString("AppDate");
+        appDateString = globalVar.FormatStringDate_ddMMyyyy_To_yyyyMMdd(getArguments().getString("AppDate"));
         appTimeString = getArguments().getString("AppTime");
         DPcodeString = objectSaleLogin.DPcode;
         SAcodeString = objectSaleLogin.SACode;
-        globalVar = new GlobalVar();
+
 
         Log.d(tag, "DPcode on Fragment ==> " + DPcodeString);
         Log.d(tag, "SAcode on Fragment ==> " + SAcodeString);
@@ -62,7 +68,37 @@ public class EditAppointmentFragment extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_edit_appointment, container, false);
-
         return view;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+
+        //Show View
+        showView();
+    }
+
+    private void showView() {
+        String tag = "7SepV3";
+        MyConstant myConstant = new MyConstant();
+        try {
+            PostFourString postFourString = new PostFourString(getActivity());
+            postFourString.execute(
+                    "DPcode", DPcodeString,
+                    "SAcode", SAcodeString,
+                    "AppDate", appDateString,
+                    "AppTime", appTimeString, myConstant.getUrlGetAppointment());
+            String strJSON = postFourString.get();
+            Log.d(tag, "strJSON ==> " + strJSON);
+            strJSON = globalVar.JsonXmlToJsonString(strJSON);
+            Gson gson = new Gson();
+            Appointment appointment = gson.fromJson(strJSON.toString(), Appointment.class);
+
+        } catch (Exception e) {
+            Log.d(tag, "e ShoView ==> " + e.toString());
+
+        }
     }
 }//Main Class

@@ -265,7 +265,8 @@ public class AppointmentFragment extends Fragment {
     private void confirmDialog(final String appdateString, final String appStartTimeString) {
         final String tag = "7SepV2";
         CharSequence[] charSequences = new CharSequence[]{"Edit", "Delete"};
-        final int[] ints = new int[]{0};
+        final int[] selectedChoice = {0};
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setCancelable(false); //ถ้าไม่มีการเลือก false คือไม่ต้องทำอะไร
         builder.setIcon(android.R.drawable.ic_dialog_info); //Icon Dialog
@@ -274,7 +275,7 @@ public class AppointmentFragment extends Fragment {
         builder.setSingleChoiceItems(charSequences, 0, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                ints[0] = i;
+                selectedChoice[0] = i;
             }
         });
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -287,11 +288,11 @@ public class AppointmentFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
-                Log.d(tag, "Choose ==> " + ints[0]);//1 ==> Delete, 0 = Edit
+                Log.d(tag, "Choose ==> " + selectedChoice[0]);//1 ==> Delete, 0 = Edit
 
-                switch (ints[0]) {
+                switch (selectedChoice[0]) {
                     case 0: //Edit
-                        myEditAppointment(appdateString, appStartTimeString);
+                        myAddEditPreviewAppointment(globalVar._EDIT, appdateString, appStartTimeString);
                         break;
                     case 1:
                         myDeleteAppointment(appdateString, appStartTimeString);
@@ -304,7 +305,7 @@ public class AppointmentFragment extends Fragment {
 
     }//ConfirmDialog
 
-    private void myEditAppointment(String strAppDate, String strAppStartTime) {
+    private void myAddEditPreviewAppointment(String currentModify,String strAppDate, String strAppStartTime) {
 
         //addToBackStack ค้างหน้าเดิมไว้ด้วย ถ้ามีการ back กลับมาหน้าเดิมได้
         getActivity().getSupportFragmentManager()

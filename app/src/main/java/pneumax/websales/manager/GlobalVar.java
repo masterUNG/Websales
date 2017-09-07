@@ -11,17 +11,22 @@ import java.util.Date;
 
 public class GlobalVar {
 
+    public static String _ADD ="ADD";
+    public static String _EDIT ="EDIT";
+    public static String _DELETE ="DELETE";
+    public static String _PREVIEW ="PREVIEW";
+
     //Convert Data Webservice To JSONArray Not [ ]
-    public String JsonXmlToJsonStringNotSquareBracket(String string){
+    public String JsonXmlToJsonStringNotSquareBracket(String string) {
         string = string.substring(40, string.length());
         string = string.replace("<string xmlns=\"http://58.181.171.23/Webservice/\">", "");
         string = string.replace("</string>", "");
-        string = string.replace("[", "").replace("]","");
+        string = string.replace("[", "").replace("]", "");
         return string;
     }
 
     //Convert Data Webservice To JSONArray
-    public String JsonXmlToJsonString(String string){
+    public String JsonXmlToJsonString(String string) {
         string = string.substring(40, string.length());
         string = string.replace("<string xmlns=\"http://58.181.171.23/Webservice/\">", "");
         string = string.replace("</string>", "");
@@ -75,14 +80,14 @@ public class GlobalVar {
         return s.toString().trim().length() == 0;
     }
 
-    private static GlobalVar mInstance= null;
+    private static GlobalVar mInstance = null;
 
     public int someValueIWantToKeep;
 
 //    protected GlobalVar(){}
 
-    public static synchronized pneumax.websales.manager.GlobalVar getInstance(){
-        if(null == mInstance){
+    public static synchronized pneumax.websales.manager.GlobalVar getInstance() {
+        if (null == mInstance) {
             mInstance = new GlobalVar();
         }
         return mInstance;
