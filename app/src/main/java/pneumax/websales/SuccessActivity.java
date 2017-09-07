@@ -150,7 +150,7 @@ public class SuccessActivity extends AppCompatActivity {
     private void CallfragmentAppointment() {
         setTitleToolbar("Appointment");
 
-        //ใส่ค่า mRecycleViewFragment.setArguments(UserBean) ตรงๆไม่ได้ ต้องแปลงก่อนส่ง
+        //ใส่ค่า AppointmentFragment.setArguments(UserBean) ตรงๆไม่ได้ ต้องแปลงก่อนส่ง
         Bundle bundle = new Bundle();
         bundle.putParcelable(Employees.TABLE_NAME, employeesLogin);
         bundle.putParcelable(ObjectSale.TABLE_NAME, objectSaleLogin);

@@ -9,7 +9,7 @@
         android:id="@+id/txtColAppdate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:text="@string/dateAppoint"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="@dimen/h2" />
@@ -27,7 +27,7 @@
         android:id="@+id/txtColCsname"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="3"
+        android:layout_weight="4"
         android:text="@string/customerAppoint"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="@dimen/h2" />
