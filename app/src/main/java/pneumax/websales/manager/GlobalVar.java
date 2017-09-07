@@ -59,6 +59,14 @@ public class GlobalVar {
         }
     }
 
+    public String FormatStringDate_ddMMyyyy_To_yyyyMMdd(String strAppDate) {
+        String resultString = null;
+        String[] strings = strAppDate.split("/");
+        resultString = strings[2] + "-" + strings[1] + "-" + strings[0];
+
+        return resultString;
+    }//myFormatAppDate
+
     public boolean isEmptyEditText(EditText etText) {
         return etText.getText().toString().trim().length() == 0;
     }

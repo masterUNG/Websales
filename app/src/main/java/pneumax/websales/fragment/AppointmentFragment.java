@@ -323,7 +323,7 @@ public class AppointmentFragment extends Fragment {
 
         String tag = "7SepV2";
         MyConstant myConstant = new MyConstant();
-        String myAppDate = myFormatAppDateddMMyyyy_ToyyyyMMdd(strAppDate);
+        String myAppDate = globalVar.FormatStringDate_ddMMyyyy_To_yyyyMMdd(strAppDate);
 
         Log.d(tag, "DPcode == >" + DPcodeString);
         Log.d(tag, "SAcode == >" + SAcodeString);
@@ -359,12 +359,5 @@ public class AppointmentFragment extends Fragment {
         }
     }//myDeleteAppointment
 
-    private String myFormatAppDateddMMyyyy_ToyyyyMMdd(String strAppDate) {
-        String resultString = null;
-        String[] strings = strAppDate.split("/");
-        resultString = strings[2] + "-" + strings[1] + "-" + strings[0];
-
-        return resultString;
-    }//myFormatAppDate
 
 }//Main Class
