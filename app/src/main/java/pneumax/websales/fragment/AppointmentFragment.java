@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -39,9 +40,11 @@ public class AppointmentFragment extends Fragment {
     private ObjectSale objectSaleLogin;
     private GlobalVar globalVar;
     //Explicit
-    private String DPcodeString, SAcodeString;
+    private String DPcodeString, SAcodeString, startDateString, endDateString;
     private TextView mtxtvSearchStartDate;
     private TextView mtxtvSearchEndDate;
+    private Calendar calendar;
+    private int currentDayAnInt, currentMonthAnInt, currentYearAnInt;
 
     public static AppointmentFragment appointmentInsatance(Parcelable parcelEmplyeesLogin,
                                                            Parcelable parcelObjectSaleLogin) {
@@ -59,63 +62,9 @@ public class AppointmentFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_appointment, container, false);
-
-        mtxtvSearchStartDate = (TextView) view.findViewById(R.id.txtvSearchStartDate);
-        mtxtvSearchEndDate = (TextView) view.findViewById(R.id.txtvSearchEndate);
-
-        mtxtvSearchStartDate.setText("2017-08-01");
-        mtxtvSearchEndDate.setText("2017-09-30");
-
-        //set Search StartDate EndDate
-        setSearchDate();
-
         return view;
     }//onCreateView
 
-    private void setSearchDate() {
-        mtxtvSearchStartDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // calender class's instance and get current date , month and year from calender
-                final Calendar c = Calendar.getInstance();
-                int mYear = c.get(Calendar.YEAR); // current year
-                int mMonth = c.get(Calendar.MONTH); // current month
-                int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
-                //ถ้า วันที่นัด เป็นว่างให้ Set ค่าเริ่มต้นด้วย
-//                String strStartDate = mtxtvSearchStartDate.getText().toString();
-//                if (!globalVar.isEmptyString(strStartDate)) {
-//                    Date date = globalVar.setConvertStringToDate(mtxtvSearchStartDate.getText().toString());
-//
-//                    mYear = 2017; // current year
-//                    mMonth = c.get(Calendar.MONTH); // current month
-//                    mDay = c.get(Calendar.DAY_OF_MONTH); // current day
-//                }
-
-                // date picker dialog
-                DatePickerDialog datePickerDialog;
-                datePickerDialog = new DatePickerDialog(getActivity(),
-                        new DatePickerDialog.OnDateSetListener() {
-
-                            @Override
-                            public void onDateSet(DatePicker view, int year,
-                                                  int monthOfYear, int dayOfMonth) {
-                                // set day of month , month and year value in the edit text
-                                mtxtvSearchStartDate.setText(dayOfMonth + "/"
-                                        + (monthOfYear + 1) + "/" + year);
-
-                            }
-                        }, mYear, mMonth, mDay);
-                datePickerDialog.show();
-            }
-        });
-
-        mtxtvSearchEndDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-    }//setSearchDate
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -136,7 +85,131 @@ public class AppointmentFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        //Setup Start and End Date
+        setupStartEndDate();
+
         //Create ListView
+        createListView();
+
+        //Find Current Time
+        findCurrentTime();
+
+        //Search Controller
+        searchController();
+
+        //Setup Search Start and End Date
+        setupSearchStartEndDate();
+
+    }//onActivityCreated
+
+    private void setupStartEndDate() {
+        String tag = "7SepV1";
+        MyConstant myConstant = new MyConstant();
+        startDateString = myConstant.getStartDateString();
+        endDateString = myConstant.getEndDateString();
+        Log.d(tag, "StartDate (0)==> " + startDateString);
+    }
+
+    private void findCurrentTime() {
+        calendar = Calendar.getInstance();
+
+        int currentDayStartAnInt, currentMonthStartAnInt, currentYearStartAnInt;
+        Calendar calendarStartDate = Calendar.getInstance();
+        //Before 10 Day
+//        int intDay = calendar.get(Calendar.DAY_OF_YEAR);
+//        if (intDay>10) {
+//            intDay = intDay - 10;
+//        }
+//        calendar.set(Calendar.DAY_OF_YEAR, intDay);
+
+        //Before 1 Month
+        int intMonth = calendarStartDate.get(Calendar.MONTH);
+        if (intMonth != 0) {
+            intMonth -= 1;
+        }
+        calendarStartDate.set(Calendar.MONTH, intMonth);
+        currentDayStartAnInt = calendarStartDate.get(Calendar.DAY_OF_MONTH);
+        currentMonthStartAnInt = calendarStartDate.get(Calendar.MONTH); //0 ==> Jan, 1 ==> Feb
+        currentYearStartAnInt = calendarStartDate.get(Calendar.YEAR);
+
+        currentDayAnInt = calendar.get(Calendar.DAY_OF_MONTH);
+        currentMonthAnInt = calendar.get(Calendar.MONTH); //0 ==> Jan, 1 ==> Feb
+        currentYearAnInt = calendar.get(Calendar.YEAR);
+
+        startDateString = mySetupDate(currentYearStartAnInt, currentMonthStartAnInt, currentDayStartAnInt);
+        endDateString = mySetupDate(currentYearAnInt, currentMonthAnInt, currentDayAnInt);
+
+        TextView _txtvSearchStartDate = getView().findViewById(R.id.txtvSearchStartDate);
+        TextView _txtvSearchEndDate = getView().findViewById(R.id.txtvSearchEndate);
+        _txtvSearchStartDate.setText(startDateString);
+        _txtvSearchEndDate.setText(endDateString);
+    }//findCurrentTime
+
+    private void setupSearchStartEndDate() {
+        final TextView textView = getView().findViewById(R.id.txtvSearchStartDate);
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int intYear, int intMonth, int intDay) {
+                        startDateString = mySetupDate(intYear, intMonth, intDay);
+                        textView.setText(startDateString);
+                    }
+                }, currentYearAnInt, currentMonthAnInt, currentDayAnInt);
+                datePickerDialog.show();
+            }
+        });
+
+        final TextView _txtvSearchEndDate = getView().findViewById(R.id.txtvSearchEndate);
+        _txtvSearchEndDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int intYear, int intMonth, int intDay) {
+                        endDateString = mySetupDate(intYear, intMonth, intDay);
+                        _txtvSearchEndDate.setText(endDateString);
+                    }
+                }, currentYearAnInt, currentMonthAnInt, currentDayAnInt);
+                datePickerDialog.show();
+            }
+        });
+    }//setupStartDate
+
+    private String mySetupDate(int intYear, int intMonth, int intDay) {
+        String tag = "7SepV1";
+        String resultString = null;
+
+        String strYear = Integer.toString(intYear);
+        String strMonth = Integer.toString(intMonth + 1);;
+        if (strMonth.length() == 1) {
+            strMonth = "0" + strMonth;
+        }
+
+        String strDay = Integer.toString(intDay);
+        if (strDay.length() == 1) {
+            strDay = "0" + strDay;
+        }
+        resultString = strYear + "-" + strMonth + "-" + strDay;
+        Log.d(tag, "resultString ==> " + resultString);
+
+        return resultString;
+    }
+
+    private void searchController() {
+        Button button = getView().findViewById(R.id.btnSearch);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Create ListView
+                createListView();
+            }
+        });
+    }//Search Controller
+
+
+    private void createListView() {
         ListView listView = getView().findViewById(R.id.livAppointment);
         MyConstant myConstant = new MyConstant();
         String tag = "6SepV2";
@@ -146,8 +219,8 @@ public class AppointmentFragment extends Fragment {
             getAppointmentGridWhere.execute(
                     objectSaleLogin.DPcode,
                     objectSaleLogin.SACode,
-                    myConstant.getStartDateString(),
-                    myConstant.getEndDateString(),
+                    startDateString,
+                    endDateString,
                     myConstant.getUrlGetAppointmentGrid());
 
             String resultJSON = getAppointmentGridWhere.get();
@@ -183,11 +256,11 @@ public class AppointmentFragment extends Fragment {
         } catch (Exception e) {
             Log.d(tag, "e Create ListView ==> " + e.toString());
         }
+    }//createListView
 
-
-    }//onActivityCreated
 
     private void confirmDialog(String appdateString, String appStartTimeString) {
+        String tag = "7SepV2";
         CharSequence[] charSequences = new CharSequence[]{"Edit", "Delete"};
         final int[] ints = new int[]{0};
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
