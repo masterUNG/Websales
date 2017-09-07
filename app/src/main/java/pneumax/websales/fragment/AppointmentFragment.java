@@ -49,6 +49,7 @@ public class AppointmentFragment extends Fragment {
     private TextView mtxtvSearchStartDate;
     private TextView mtxtvSearchEndDate;
     private Calendar calendar;
+    private int currentDayStartAnInt, currentMonthStartAnInt, currentYearStartAnInt;
     private int currentDayAnInt, currentMonthAnInt, currentYearAnInt;
 
     public static AppointmentFragment appointmentInsatance(Parcelable parcelEmplyeesLogin,
@@ -118,7 +119,6 @@ public class AppointmentFragment extends Fragment {
     private void findCurrentTime() {
         calendar = Calendar.getInstance();
 
-        int currentDayStartAnInt, currentMonthStartAnInt, currentYearStartAnInt;
         Calendar calendarStartDate = Calendar.getInstance();
         //Before 10 Day
 //        int intDay = calendar.get(Calendar.DAY_OF_YEAR);
@@ -144,37 +144,35 @@ public class AppointmentFragment extends Fragment {
         startDateString = mySetupDate(currentYearStartAnInt, currentMonthStartAnInt, currentDayStartAnInt);
         endDateString = mySetupDate(currentYearAnInt, currentMonthAnInt, currentDayAnInt);
 
-        TextView _txtvSearchStartDate = getView().findViewById(R.id.txtvSearchStartDate);
-        TextView _txtvSearchEndDate = getView().findViewById(R.id.txtvSearchEndate);
-        _txtvSearchStartDate.setText(startDateString);
-        _txtvSearchEndDate.setText(endDateString);
+        mtxtvSearchStartDate = getView().findViewById(R.id.txtvSearchStartDate);
+        mtxtvSearchEndDate = getView().findViewById(R.id.txtvSearchEndate);
+        mtxtvSearchStartDate.setText(startDateString);
+        mtxtvSearchEndDate.setText(endDateString);
     }//findCurrentTime
 
     private void setupSearchStartEndDate() {
-        final TextView textView = getView().findViewById(R.id.txtvSearchStartDate);
-        textView.setOnClickListener(new View.OnClickListener() {
+        mtxtvSearchStartDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int intYear, int intMonth, int intDay) {
                         startDateString = mySetupDate(intYear, intMonth, intDay);
-                        textView.setText(startDateString);
+                        mtxtvSearchStartDate.setText(startDateString);
                     }
-                }, currentYearAnInt, currentMonthAnInt, currentDayAnInt);
+                }, currentYearStartAnInt, currentMonthStartAnInt, currentDayStartAnInt);
                 datePickerDialog.show();
             }
         });
 
-        final TextView _txtvSearchEndDate = getView().findViewById(R.id.txtvSearchEndate);
-        _txtvSearchEndDate.setOnClickListener(new View.OnClickListener() {
+        mtxtvSearchEndDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int intYear, int intMonth, int intDay) {
                         endDateString = mySetupDate(intYear, intMonth, intDay);
-                        _txtvSearchEndDate.setText(endDateString);
+                        mtxtvSearchEndDate.setText(endDateString);
                     }
                 }, currentYearAnInt, currentMonthAnInt, currentDayAnInt);
                 datePickerDialog.show();
@@ -293,6 +291,7 @@ public class AppointmentFragment extends Fragment {
 
                 switch (ints[0]) {
                     case 0: //Edit
+                        myEditAppointment(appdateString, appStartTimeString);
                         break;
                     case 1:
                         myDeleteAppointment(appdateString, appStartTimeString);
@@ -305,11 +304,26 @@ public class AppointmentFragment extends Fragment {
 
     }//ConfirmDialog
 
+    private void myEditAppointment(String strAppDate, String strAppStartTime) {
+
+        //addToBackStack ค้างหน้าเดิมไว้ด้วย ถ้ามีการ back กลับมาหน้าเดิมได้
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.serviceContentFragment,
+                        EditAppointmentFragment.editAppointmentInstance(
+                                employeesLogin, objectSaleLogin,
+                                strAppDate, strAppStartTime))
+                .addToBackStack(null)//addToBackStack ค้างหน้าเดิมไว้ด้วย ถ้ามีการ back กลับมาหน้าเดิมได้
+                .commit();
+
+    }//myEditAppointment
+
+
     private void myDeleteAppointment(String strAppDate, String strAppStartTime) {
 
         String tag = "7SepV2";
         MyConstant myConstant = new MyConstant();
-        String myAppDate = myFormatAppDate(strAppDate);
+        String myAppDate = myFormatAppDateddMMyyyy_ToyyyyMMdd(strAppDate);
 
         Log.d(tag, "DPcode == >" + DPcodeString);
         Log.d(tag, "SAcode == >" + SAcodeString);
@@ -345,13 +359,12 @@ public class AppointmentFragment extends Fragment {
         }
     }//myDeleteAppointment
 
-    private String myFormatAppDate(String strAppDate) {
-
+    private String myFormatAppDateddMMyyyy_ToyyyyMMdd(String strAppDate) {
         String resultString = null;
         String[] strings = strAppDate.split("/");
         resultString = strings[2] + "-" + strings[1] + "-" + strings[0];
 
         return resultString;
-    }
+    }//myFormatAppDate
 
 }//Main Class
