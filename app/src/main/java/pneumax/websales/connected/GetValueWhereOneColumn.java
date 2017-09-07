@@ -36,8 +36,7 @@ public class GetValueWhereOneColumn extends AsyncTask<String, Void, String> {
 
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
-
-        return null;
     }
 }

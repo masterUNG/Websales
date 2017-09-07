@@ -16,6 +16,9 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -24,11 +27,13 @@ import java.util.Calendar;
 
 import pneumax.websales.R;
 import pneumax.websales.connected.GetAppointmentGridWhere;
+import pneumax.websales.connected.Post4String;
 import pneumax.websales.manager.AppointmentAdapter;
 import pneumax.websales.manager.GlobalVar;
 import pneumax.websales.manager.MyConstant;
 import pneumax.websales.object.Employees;
 import pneumax.websales.object.ObjectSale;
+import pneumax.websales.object.ResultExecuteSQL;
 
 /**
  * Created by Sitrach on 06/09/2017.
@@ -259,8 +264,8 @@ public class AppointmentFragment extends Fragment {
     }//createListView
 
 
-    private void confirmDialog(String appdateString, String appStartTimeString) {
-        String tag = "7SepV2";
+    private void confirmDialog(final String appdateString, final String appStartTimeString) {
+        final String tag = "7SepV2";
         CharSequence[] charSequences = new CharSequence[]{"Edit", "Delete"};
         final int[] ints = new int[]{0};
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -271,7 +276,7 @@ public class AppointmentFragment extends Fragment {
         builder.setSingleChoiceItems(charSequences, 0, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                ints[0] = i + 1;
+                ints[0] = i;
             }
         });
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -283,11 +288,70 @@ public class AppointmentFragment extends Fragment {
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+
+                Log.d(tag, "Choose ==> " + ints[0]);//1 ==> Delete, 0 = Edit
+
+                switch (ints[0]) {
+                    case 0: //Edit
+                        break;
+                    case 1:
+                        myDeleteAppointment(appdateString, appStartTimeString);
+                        break;
+                }
                 dialogInterface.dismiss();
             }
         });
         builder.show();
 
     }//ConfirmDialog
+
+    private void myDeleteAppointment(String strAppDate, String strAppStartTime) {
+
+        String tag = "7SepV2";
+        MyConstant myConstant = new MyConstant();
+        String myAppDate = myFormatAppDate(strAppDate);
+
+        Log.d(tag, "DPcode == >" + DPcodeString);
+        Log.d(tag, "SAcode == >" + SAcodeString);
+        Log.d(tag, "AppDate == >" + myAppDate);
+        Log.d(tag, "AppStartTime == >" + strAppStartTime);
+
+        try {
+            Post4String post4String = new Post4String(getActivity());
+            post4String.execute(
+                    "DPcode",
+                    DPcodeString,
+                    "SAcode",
+                    SAcodeString,
+                    "AppDate",
+                    myAppDate,
+                    "AppStartTime",
+                    strAppStartTime, myConstant.getUrlDeleteAppointment());
+            String strJSON = post4String.get();
+            strJSON = globalVar.JsonXmlToJsonString(strJSON);
+            Gson gson = new Gson();
+            ResultExecuteSQL resultExecuteSQL = gson.fromJson(strJSON.toString(), ResultExecuteSQL.class);
+
+            String strResultID = resultExecuteSQL.getResultID().toString();
+            if (strResultID.equals("Success")) {
+                //Create ListView
+                createListView();
+                Toast.makeText(getActivity(), "Delete Success", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getActivity(), "ไม่สามารถ Delete ได้ เนื่องจาก " + resultExecuteSQL.getResultMessage().toString(), Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+
+        }
+    }//myDeleteAppointment
+
+    private String myFormatAppDate(String strAppDate) {
+
+        String resultString = null;
+        String[] strings = strAppDate.split("/");
+        resultString = strings[2] + "-" + strings[1] + "-" + strings[0];
+
+        return resultString;
+    }
 
 }//Main Class

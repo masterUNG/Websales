@@ -56,6 +56,11 @@ public class MyConstant {
         return urlGetCustomerGrid;
     }
 
+    //About URL DeleteAppointment
+    private String urlDeleteAppointment = "http://58.181.171.23/webservice/Service.asmx/DeleteAppointment";
+    public String getUrlDeleteAppointment() {
+        return urlDeleteAppointment;
+    }
 
     private String[] columnEmployeesStrings = new String[]{
             "STFcode",
