@@ -1,31 +1,47 @@
 package pneumax.websales.object;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
- * Created by sitrach on 05/09/2017.
+ * Created by sitrach on 11/09/2017.
  */
 
-public class ResultExecuteSQL {
-    /**
-     * ResultID : Function_InsertAppointment
-     * ResultMessage : Conversion from string "" to type 'Date' is not valid.
-     */
+public class ResultExecuteSQL implements Parcelable {
 
-    private String ResultID;
-    private String ResultMessage;
+    public String ResultID;
+    public String ResultMessage;
 
-    public String getResultID() {
-        return ResultID;
+    public final static String TABLE_NAME = "ResultExecuteSQL";
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
-    public void setResultID(String ResultID) {
-        this.ResultID = ResultID;
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.ResultID);
+        dest.writeString(this.ResultMessage);
     }
 
-    public String getResultMessage() {
-        return ResultMessage;
+    public ResultExecuteSQL() {
     }
 
-    public void setResultMessage(String ResultMessage) {
-        this.ResultMessage = ResultMessage;
+    protected ResultExecuteSQL(Parcel in) {
+        this.ResultID = in.readString();
+        this.ResultMessage = in.readString();
     }
+
+    public static final Parcelable.Creator<ResultExecuteSQL> CREATOR = new Parcelable.Creator<ResultExecuteSQL>() {
+        @Override
+        public ResultExecuteSQL createFromParcel(Parcel source) {
+            return new ResultExecuteSQL(source);
+        }
+
+        @Override
+        public ResultExecuteSQL[] newArray(int size) {
+            return new ResultExecuteSQL[size];
+        }
+    };
 }

@@ -42,7 +42,7 @@ public class AppointmentGrid {
 
     public static class AppointmentGridBean {
 
-        private int Number1;
+        private int RowNo;
         private String AppDate;
         private String AppStartTime;
         private String CSCode;
@@ -62,12 +62,12 @@ public class AppointmentGrid {
         private String CreateDate;
         private String AppVisit_ByPhone;
 
-        public int getNumber1() {
-            return Number1;
+        public int getRowNo() {
+            return RowNo;
         }
 
-        public void setNumber1(int Number1) {
-            this.Number1 = Number1;
+        public void setNumber1(int RowNo) {
+            this.RowNo = RowNo;
         }
 
         public String getAppDate() {

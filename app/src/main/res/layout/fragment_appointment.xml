@@ -1,50 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!--Search-->
+    <!--Search Date-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="@dimen/padding">
+        android:padding="@dimen/padding1"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
+            android:gravity="left"
             android:text="@string/titleSearchDateAppoint"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/h2" />
 
         <TextView
-            android:textColor="@color/colorAccent"
             android:id="@+id/txtvSearchStartDate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
             android:clickable="true"
             android:text="01/08/2017"
+            android:textColor="@color/colorAccent"
             android:textSize="@dimen/h3" />
 
         <TextView
-            android:textColor="@color/colorAccent"
             android:id="@+id/txtvSearchEndate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
             android:clickable="true"
             android:text="30/09/2017"
+            android:textColor="@color/colorAccent"
             android:textSize="@dimen/h3" />
 
         <Button
             android:id="@+id/btnSearch"
+            android:layout_width="40dp"
+            android:layout_height="25dp"
+            android:background="@drawable/ic_search_black_36dp" />
+    </LinearLayout>
+
+    <!--Search Text-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/padding1">
+
+        <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/ic_action_search" />
+            android:gravity="left"
+            android:text="@string/titleSearch"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/h2" />
+
+        <EditText
+            android:id="@+id/txtSearchCustName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:hint="พิมพ์ชื่อลูกค้า"
+            android:textSize="@dimen/h3"
+            android:maxLines="1"/>
+
     </LinearLayout>
 
 
@@ -86,10 +117,31 @@
 
     </LinearLayout>
 
-    <!--Content-->
-    <ListView
-        android:id="@+id/livAppointment"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <!--Content-->
+        <ListView
+            android:id="@+id/livAppointment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fabBtnAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/fab_add"
+            app:borderWidth="0dp"
+            app:elevation="6dp"
+            app:pressedTranslationZ="12dp" />
+
+    </RelativeLayout>
+
 
 </LinearLayout>

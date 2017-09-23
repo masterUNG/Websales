@@ -9,7 +9,24 @@
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
     <string name="titleSearchDateAppoint">วันที่นัด :</string>
+    <string name="titleCSname">ชื่อลูกค้า :</string>
+    <string name="titleCScode">รหัสลูกค้า :</string>
+    <string name="titleCSIcode">อุตสาฯ :</string>
+    <string name="titleAreaName">เขต :</string>
+    <string name="titleCSBcode">ธุรกิจ :</string>
+    <string name="titleCTPname">ผู้ติดต่อ :</string>
+    <string name="titleAppTime">เวลา :</string>
+    <string name="titleWorkType">ประเภทงาน :</string>
+    <string name="titlePurpose">จุดประสงค์ :</string>
+    <string name="titleAppRemark">พบลูกค้าเพื่อ :</string>
+    <string name="titleAppReasonReturn">เหตุผลที่บันทึกนัดหมายย้อนหลัง :</string>
+    <string name="titleSearch">ค้นหา :</string>
+    <string name="hintCSname">พิมพ์ชื่อลูกค้า</string>
     <string name="dateAppoint">วันที่นัด</string>
+    <string name="workOffice">อยู่ Office</string>
+    <string name="absent">ลางาน</string>
     <string name="timeAppoint">เวลา</string>
     <string name="customerAppoint">ชื่อลูกค้า</string>
+    <string name="columnAreaName">เขตขาย</string>
+    <string name="columnCScode">รหัสลูกค้า</string>
 </resources>

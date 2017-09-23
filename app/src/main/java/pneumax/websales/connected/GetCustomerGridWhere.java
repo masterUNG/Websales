@@ -7,28 +7,26 @@ import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 
 /**
- * Created by Sitrach on 05/09/2017.
+ * Created by sitrach on 22/09/2017.
  */
 
-public class GetAppointmentGridWhere extends AsyncTask<String, Void, String>{
+public class GetCustomerGridWhere extends AsyncTask<String, Void, String> {
 
     private Context context;
-    public GetAppointmentGridWhere(Context context) {
+    public GetCustomerGridWhere(Context context) {
         this.context = context;
     }
 
     @Override
-    protected String doInBackground(String... params) {
+    protected String doInBackground(String... strings) {
         try {
             okhttp3.RequestBody data = new FormBody.Builder()
-                    .add("DPcode", params[0])
-                    .add("SAcode", params[1])
-                    .add("StartDate", params[2])
-                    .add("EndDate", params[3])
-                    .add("CSName", params[4])
+                    .add("SAcode", strings[0])
+                    .add("DPcode", strings[1])
+                    .add("SearchValue", strings[2])
                     .build();
             okhttp3.Request.Builder builder = new okhttp3.Request.Builder();
-            builder.url(params[5]).post(data).build();
+            builder.url(strings[3]).post(data).build();
             okhttp3.Request request = builder.build();
 
             OkHttpClient client = new OkHttpClient.Builder()

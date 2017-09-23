@@ -17,7 +17,7 @@ public class BasicAuthInterceptor  implements Interceptor {
     private String credentials;
 
     public BasicAuthInterceptor() {
-        this.credentials = Credentials.basic("usertest", "User1234");
+        this.credentials = Credentials.basic("usertest", "UserP@ssw0rd");
     }
 //    public BasicAuthInterceptor(String user, String password) {
 //        this.credentials = Credentials.basic(user, password);

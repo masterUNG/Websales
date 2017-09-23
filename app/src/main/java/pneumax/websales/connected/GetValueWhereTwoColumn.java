@@ -7,13 +7,13 @@ import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 
 /**
- * Created by Sitrach on 07/09/2017.
+ * Created by sitrach on 21/09/2017.
  */
 
-public class Post4String extends AsyncTask<String, Void, String> {
+public class GetValueWhereTwoColumn extends AsyncTask<String, Void, String> {
 
     private Context context;
-    public Post4String(Context context) {
+    public GetValueWhereTwoColumn(Context context) {
         this.context = context;
     }
 
@@ -23,12 +23,9 @@ public class Post4String extends AsyncTask<String, Void, String> {
             okhttp3.RequestBody data = new FormBody.Builder()
                     .add(strings[0], strings[1])
                     .add(strings[2], strings[3])
-                    .add("CScode", "")
-                    .add(strings[4], strings[5])
-                    .add(strings[6], strings[7])
                     .build();
             okhttp3.Request.Builder builder = new okhttp3.Request.Builder();
-            builder.url(strings[8]).post(data).build();
+            builder.url(strings[4]).post(data).build();
             okhttp3.Request request = builder.build();
 
             OkHttpClient client = new OkHttpClient.Builder()

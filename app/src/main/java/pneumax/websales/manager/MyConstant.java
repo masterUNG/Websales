@@ -49,6 +49,13 @@ public class MyConstant {
         return urlGetAppointment;
     }
 
+    //About URL getCustomer
+    private String urlGetCustomer = "http://58.181.171.23/webservice/Service.asmx/getCustomer";
+
+    public String getUrlGetCustomer() {
+        return urlGetCustomer;
+    }
+
     //About URL getCustomerGrid
     private String urlGetCustomerGrid = "http://58.181.171.23/webservice/Service.asmx/getCustomerGrid";
 
@@ -58,8 +65,43 @@ public class MyConstant {
 
     //About URL DeleteAppointment
     private String urlDeleteAppointment = "http://58.181.171.23/webservice/Service.asmx/DeleteAppointment";
+
     public String getUrlDeleteAppointment() {
         return urlDeleteAppointment;
+    }
+
+    //About URL UpdateAppointment
+    private String urlUpdateAppointment = "http://58.181.171.23/webservice/Service.asmx/UpdateAppointment";
+
+    public String getUrlUpdateAppointment() {
+        return urlUpdateAppointment;
+    }
+
+    //About URL InsertAppointment
+    private String urlInsertAppointment = "http://58.181.171.23/webservice/Service.asmx/InsertAppointment";
+
+    public String getUrlInsertAppointment() {
+        return urlInsertAppointment;
+    }
+
+    //About URL getContactPersonCombobox
+    private String urlGetContactPersonCombobox = "http://58.181.171.23/webservice/Service.asmx/getContactPersonCombobox";
+    public String getUrlGetContactPersonCombobox() {
+        return urlGetContactPersonCombobox;
+    }
+
+    //About URL getAppointmentWorkType
+    private String urlGetAppointmentWorkType = "http://58.181.171.23/webservice/Service.asmx/getAppointmentWorkType";
+
+    public String getUrlGetAppointmentWorkType() {
+        return urlGetAppointmentWorkType;
+    }
+
+    //About URL getAppointmentPurpose
+    private String urlGetAppointmentPurpose = "http://58.181.171.23/webservice/Service.asmx/getAppointmentPurpose";
+
+    public String getUrlGetAppointmentPurpose() {
+        return urlGetAppointmentPurpose;
     }
 
     private String[] columnEmployeesStrings = new String[]{

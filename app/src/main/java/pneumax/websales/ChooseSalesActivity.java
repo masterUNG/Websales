@@ -29,9 +29,6 @@ public class ChooseSalesActivity extends AppCompatActivity {
 
     private Employees employeesLogin;
     private ObjectSale objectSaleLogin;
-    private String STFcodeString, STFtitleString, DPcodeString, DPnameString, PSTdes_EngString,
-            PSTCodeString, SACodeString, STFfnameString, STFlnameString, STFfullnameString,
-            BRcode1String, BRdesc_TString, STFstartString;
 
     private MyConstant myConstant;
     private GlobalVar globalVar;

@@ -9,7 +9,7 @@ import android.os.Parcelable;
 
 public class Appointment implements Parcelable{
 
-    public String Number1;
+    public String RowNo;
     public String AppDate;
     public String AppStartTime;
     public String CSCode;
@@ -30,7 +30,7 @@ public class Appointment implements Parcelable{
     public String CreateDate;
     public String AppVisit_ByPhone;
 
-    public final static String TABLE_NAME = "Employees";
+    public final static String TABLE_NAME = "Appointment";
 
     @Override
     public int describeContents() {
@@ -39,7 +39,7 @@ public class Appointment implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.Number1);
+        dest.writeString(this.RowNo);
         dest.writeString(this.AppDate);
         dest.writeString(this.AppStartTime);
         dest.writeString(this.CSCode);
@@ -65,7 +65,7 @@ public class Appointment implements Parcelable{
     }
 
     protected Appointment(Parcel in) {
-        this.Number1 = in.readString();
+        this.RowNo = in.readString();
         this.AppDate = in.readString();
         this.AppStartTime = in.readString();
         this.CSCode = in.readString();
